@@ -1,0 +1,6 @@
+Questions
+1. SetUp of Application
+- Add app files to repo
+- Test if the application is working locally
+
+2. How do you use a kubeconfig file to gain access to a cluster?
