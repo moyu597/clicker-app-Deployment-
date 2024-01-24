@@ -1,0 +1,41 @@
+# Define the GitHub Actions workflow named "Build and Push to GHCR"
+name: Build and Push to GHCR
+
+# Trigger the workflow on every push event to the specified branch
+on:
+  push:
+    branches:
+      - main # Or any branch you want this to run on
+
+# Define a job named "build-and-push" that runs on the latest version of the Ubuntu environment
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    # Define the steps to be executed as part of the job
+    steps:
+      # Step 1: Checkout the source code into the runner's workspace
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Log in to GitHub Container Registry using Docker login action
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Step 3: Set up Docker image tag for next js app
+      - name: Set up Docker image tag
+        id: set-tag
+        run: echo "::set-output name=tag-app::ghcr.io/moyu597/clicker-app-Deployment-/mynextjsapp:${GITHUB_RUN_NUMBER}"
+
+      # Step 4: Build and push Docker image for mynextjsapp
+      - name: Build and push Docker image (mynextjsapp)
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./apps/clicker-app-Deployment-/Dockerfile
+          push: true
+          tags: ${{ steps.set-tag.outputs.tag }}
