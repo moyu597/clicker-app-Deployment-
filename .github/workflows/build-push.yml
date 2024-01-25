@@ -36,6 +36,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./clicker-app-Deployment-/Dockerfile
+          file: ./Dockerfile  #in my repo go to the root folder
           push: true
           tags: ${{ env.TAG }}
