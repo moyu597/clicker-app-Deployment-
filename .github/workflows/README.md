@@ -1,0 +1,1 @@
+# Note to login to the github docker registry, we need to always set the PAT as a reepository token .
