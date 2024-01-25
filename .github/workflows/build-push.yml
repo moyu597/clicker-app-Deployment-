@@ -38,4 +38,4 @@ jobs:
           context: .
           file: ./apps/clicker-app-Deployment-/Dockerfile
           push: true
-          tags: ${{ steps.set-tag.outputs.tag }}
+          tags: ghcr.io/moyu597/clicker-app-Deployment-/mynextjsapp:${GITHUB_RUN_NUMBER}
