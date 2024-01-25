@@ -25,6 +25,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_PAT }}
+          debug: true
 
       # Step 3: Set up Docker image tag for next js app
       - name: Set up Docker image tag
