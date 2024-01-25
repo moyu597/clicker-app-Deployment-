@@ -29,7 +29,7 @@ jobs:
       # Step 3: Set up Docker image tag for next js app
       - name: Set up Docker image tag
         id: set-tag
-        run: echo "::set-output name=tag-app::ghcr.io/moyu597/clicker-app-Deployment-/mynextjsapp:${GITHUB_RUN_NUMBER}"
+        run: echo "TAG=ghcr.io/moyu597/clicker-app-Deployment-/mynextjsapp:${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
 
       # Step 4: Build and push Docker image for mynextjsapp
       - name: Build and push Docker image (mynextjsapp)
@@ -38,4 +38,4 @@ jobs:
           context: .
           file: ./apps/clicker-app-Deployment-/Dockerfile
           push: true
-          tags: ghcr.io/moyu597/clicker-app-Deployment-/mynextjsapp:${GITHUB_RUN_NUMBER}
+          tags: ${{ env.TAG }}
